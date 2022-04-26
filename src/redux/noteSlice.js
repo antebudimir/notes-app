@@ -21,9 +21,15 @@ const noteSlice = createSlice({
 		deleteNote: (state, action) => {
 			return state.filter((note) => note.id !== action.payload.id);
 		},
+
+		rearrangeNotes: (state, action) => {
+			const [rearrangedNote] = state.splice(action.payload.source, 1);
+			state.splice(action.payload.destination, 0, rearrangedNote);
+		},
 	},
 });
 
-export const { addNote, toggleComplete, deleteNote } = noteSlice.actions;
+export const { addNote, toggleComplete, deleteNote, rearrangeNotes } =
+	noteSlice.actions;
 
 export default noteSlice.reducer;

@@ -10,11 +10,13 @@ let persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<PersistGate loading={null} persistor={persistor}>
-				<App />
-			</PersistGate>
-		</Provider>
-	</React.StrictMode>,
+	// Compatibility issue with React 18 requires disabling of strict mode
+	// https://github.com/react-dnd/react-dnd/issues/3416
+	// <React.StrictMode>
+	<Provider store={store}>
+		<PersistGate loading={null} persistor={persistor}>
+			<App />
+		</PersistGate>
+	</Provider>,
+	// </React.StrictMode>,
 );
