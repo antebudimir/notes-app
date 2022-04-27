@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import App from './App';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
@@ -8,15 +8,13 @@ import { persistStore } from 'redux-persist';
 
 let persistor = persistStore(store);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-	// Compatibility issue with React 18 requires disabling of strict mode
-	// https://github.com/react-dnd/react-dnd/issues/3416
-	// <React.StrictMode>
-	<Provider store={store}>
-		<PersistGate loading={null} persistor={persistor}>
-			<App />
-		</PersistGate>
-	</Provider>,
-	// </React.StrictMode>,
+ReactDOM.render(
+	<React.StrictMode>
+		<Provider store={store}>
+			<PersistGate loading={null} persistor={persistor}>
+				<App />
+			</PersistGate>
+		</Provider>
+	</React.StrictMode>,
+	document.getElementById('root'),
 );
